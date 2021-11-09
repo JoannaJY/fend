@@ -1,6 +1,6 @@
 import { checkForName } from './js/nameChecker'
 import { handleSubmit } from './js/formHandler'
-console.log('hello' + checkForName);
+console.log('hello');
 import './styles/resets.scss'
 import './styles/base.scss'
 import './styles/footer.scss'
@@ -30,10 +30,35 @@ function generateContent(){
 }
 
 function sentimentData (data) {
-   
+    console.log('sentiment data entered');
+    let sentimentContent = {
+        agreement: data.agreement,
+        subjectivity: data.subjectivity,
+        confidence: data.confidence
+    }
+    postText('/text', sentimentContent)
+   .then(updateUI());
 }
 
-const postText = async (url, formdata) => {
+
+const updateUI = async () => {
+    console.log('updateUI')
+    let base = 'http://localhost:8080'
+    const request = await fetch(base+'/all');
+    try{
+        const allData = await request.json();
+        console.log(allData);
+        document.getElementById('agreement').innerHTML = `<p> ${allData.agreement} </P>`;
+        document.getElementById('subjectivity').innerHTML = `<p> ${allData.subjectivity} </p>`;
+        document.getElementById('confidence').innerHTML = `<p> ${allData.confidence} </p>`;
+        
+    }catch (error){
+        console.log('error', error)
+    }
+}
+
+
+const postText = async (url, data) => {
     let base = 'http://localhost:8080'
     const response = await fetch(base + url, {
         method:'post',
@@ -52,7 +77,7 @@ const postText = async (url, formdata) => {
     }
 }
 
-const  getContent = async (url='',data) => {
+const  getContent = async (url='', data) => {
     console.log('get content '+url);
     const request = await fetch(url);
     try {
@@ -64,14 +89,5 @@ const  getContent = async (url='',data) => {
     }
 }
 
-
-
-const response = fetch(baseUrl, requestOptions)
-  .then(response => ({
-    status: response.status, 
-    body: response.json()
-  }))
-  .then(({ status, body }) => console.log(status, body))
-  .catch(error => console.log('error', error));
 
 
