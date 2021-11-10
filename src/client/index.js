@@ -17,7 +17,7 @@ function generateContent(){
     let mytext = document.getElementById('mytext').value;
     if ( mytext !=''){
         postText ('/text', mytext)
-        .then(getContent('/all',data))
+        // .then(getContent('/all',data))
     }else {
         return "Please enter your text!"
     }
@@ -26,13 +26,15 @@ function generateContent(){
 
 const postText = async (url, data) => {
     let base = 'http://localhost:8080'
+    console.log(data);
+    let jbody = {txt:data};
     const response = await fetch(base + url, {
         method:'post',
         credential: 'same-origin',
         headers:{
             'content-type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(jbody),
     });
     try {
         const data = await response.json();
