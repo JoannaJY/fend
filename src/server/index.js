@@ -49,22 +49,21 @@ const postAPIText = async (data) => {
     formdata.append("lang", "en"); 
 
     console.log(formdata);
-    const response = await fetch(baseUrl, {
+    axios({
         method:'post',
+        url: baseUrl,
         credential: 'same-origin',
         headers:{
             'content-type': 'application/json',
         },
         body: formdata,
         redirect: 'follow'
+    })
+    .then((response)=> {
+        console.log(response);
+    }, (error)=> {
+        console.log(error);
     });
-    console.log(response);
-    try {
-        const data = await response.json();
-        return data
-    } catch(error) {
-        console.log('error', error);
-    }
 }
 // postAPIText(baseUrl, data);
 
