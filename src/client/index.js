@@ -7,53 +7,19 @@ import './styles/footer.scss'
 import './styles/form.scss'
 import './styles/header.scss'
 
-
-
-const baseUrl = "https://api.meaningcloud.com/sentiment-2.1";
-
-const formdata = new FormData();
-formdata.append("key", process.env.API_KEY);
-formdata.append("txt", document.getElementById('mytext').value);
-formdata.append("lang", en); 
-
-
+console.log('11111');
 
 document.getElementById('generate').addEventListener('click',generateContent);
 
+
 function generateContent(){
     console.log('clicked');
-    if (document.getElementById('mytext').value !=''){
-        getContent (baseUrl, sentimentData)
+    let mytext = document.getElementById('mytext').value;
+    if ( mytext !=''){
+        postText ('/text', mytext)
+        .then(getContent('/all',data))
     }else {
         return "Please enter your text!"
-    }
-}
-
-function sentimentData (data) {
-    console.log('sentiment data entered');
-    let sentimentContent = {
-        agreement: data.agreement,
-        subjectivity: data.subjectivity,
-        confidence: data.confidence
-    }
-    postText('/text', sentimentContent)
-   .then(updateUI());
-}
-
-
-const updateUI = async () => {
-    console.log('updateUI')
-    let base = 'http://localhost:8080'
-    const request = await fetch(base+'/all');
-    try{
-        const allData = await request.json();
-        console.log(allData);
-        document.getElementById('agreement').innerHTML = `<p> ${allData.agreement} </P>`;
-        document.getElementById('subjectivity').innerHTML = `<p> ${allData.subjectivity} </p>`;
-        document.getElementById('confidence').innerHTML = `<p> ${allData.confidence} </p>`;
-        
-    }catch (error){
-        console.log('error', error)
     }
 }
 
@@ -66,8 +32,7 @@ const postText = async (url, data) => {
         headers:{
             'content-type': 'application/json',
         },
-        body: formdata,
-        redirect: 'follow'
+        body: JSON.stringify(data),
     });
     try {
         const data = await response.json();
@@ -77,17 +42,23 @@ const postText = async (url, data) => {
     }
 }
 
-const  getContent = async (url='', data) => {
+const  getContent = async (url, data) => {
     console.log('get content '+url);
-    const request = await fetch(url);
+    let base = 'http://localhost:8080'
+    const request = await fetch(base + url);
     try {
         const allData = await request.json()
         console.log(allData);
         data(allData);
+        document.getElementById('agreement').innerHTML = `<p> ${allData.agreement} </P>`;
+        document.getElementById('subjectivity').innerHTML = `<p> ${allData.subjectivity} </p>`;
+        document.getElementById('confidence').innerHTML = `<p> ${allData.confidence} </p>`;
     } catch (error){
         console.log('error',error)
     }
 }
+
+
 
 
 
