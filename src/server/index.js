@@ -46,7 +46,8 @@ const postAPIText = async(data,callback) => {
         "lang":'en'
     }
 
-    axios.post(baseUrl,body).then((response) => {
+    axios.post(baseUrl,body)
+    .then((response) => {
         console.log(response);
         let results = {
             "agreement": response.data.agreement,

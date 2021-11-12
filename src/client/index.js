@@ -39,28 +39,13 @@ const postText = async (url, data) => {
     try {
         const data = await response.json();
         console.log(data);
-        return data
+        document.getElementById('agreement').innerHTML = `<p> Agreement: ${data.agreement} </P>`;
+        document.getElementById('subjectivity').innerHTML = `<p> Subjectivity: ${data.subjectivity} </p>`;
+        document.getElementById('confidence').innerHTML = `<p> Confidence: ${data.confidence} </p>`;
     } catch(error) {
         console.log('error', error);
     }
 }
-
-const  getContent = async (url, data) => {
-    console.log('get content '+url);
-    let base = 'http://localhost:8080'
-    const request = await fetch(base + url);
-    try {
-        const allData = await request.json()
-        console.log(allData);
-        data(allData);
-        document.getElementById('agreement').innerHTML = `<p> ${allData.agreement} </P>`;
-        document.getElementById('subjectivity').innerHTML = `<p> ${allData.subjectivity} </p>`;
-        document.getElementById('confidence').innerHTML = `<p> ${allData.confidence} </p>`;
-    } catch (error){
-        console.log('error',error)
-    }
-}
-
 
 
 
