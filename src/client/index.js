@@ -39,9 +39,9 @@ const postText = async (url, data) => {
     try {
         const data = await response.json();
         console.log(data);
-        document.getElementById('agreement').innerHTML = `<p> Agreement: ${data.agreement} </P>`;
-        document.getElementById('subjectivity').innerHTML = `<p> Subjectivity: ${data.subjectivity} </p>`;
-        document.getElementById('confidence').innerHTML = `<p> Confidence: ${data.confidence} </p>`;
+        document.getElementById('agreement').innerHTML = `<p> Agreement:${data.agreement} </P>`;
+        document.getElementById('subjectivity').innerHTML = `<p> Subjectivity:${data.subjectivity} </p>`;
+        document.getElementById('confidence').innerHTML = `<p> Confidence:${data.confidence} </p>`;
     } catch(error) {
         console.log('error', error);
     }
