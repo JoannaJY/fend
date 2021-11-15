@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-dotenv.config({path:'../../.env'});
+dotenv.config({path:'/Users/joannayu/Documents/Udacity/fend/projects/evaluate-news-nlp/.env'});
 
 const { exit } = require('process');
 var path = require('path');
