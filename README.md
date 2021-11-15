@@ -1,11 +1,11 @@
 ## Udacity Front End Web Developer Project 4: Evaluate a News Article with Natural Language Processing
 #### This is a practice to use Webpack
 
-## How to run:
- Please note that the server is running on port 8080, and client is running on port 8081.
+# How to run:
+ ## Please note that the server is running on port 8080, and client is running on port 8081.
 
- Please start server first to make sure it is running on 8080.
- 
+ ## Please start server first to make sure it is running on 8080.
+
 ### In this project I do:
 
 - set up with Webpack, Express, Node, and Sass, and Service Workers
