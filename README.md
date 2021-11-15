@@ -24,5 +24,5 @@
 
 - Be able to show content offline
 
-- Deploying
+
 
