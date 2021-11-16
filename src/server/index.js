@@ -26,8 +26,8 @@ console.log(`Your API key is ${process.env.API_KEY}`);
 
 
 // setup server
-app.listen(8080, function () {
-    console.log('Example app listening on port 8080!')
+app.listen(8081, function () {
+    console.log('Example app listening on port 8081!')
 })
 
 

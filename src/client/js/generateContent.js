@@ -29,7 +29,7 @@ function generateContent(){
 }
 
 const postText = async (url, data, callback) => {
-    let base = 'http://localhost:8080'
+    let base = 'http://localhost:8081'
     console.log(data);
     
     let jbody = {txt:data};
